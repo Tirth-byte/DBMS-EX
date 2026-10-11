@@ -1,0 +1,21 @@
+AppointmentID,PatientID,PatientName,PatientPhone,DoctorID,DoctorName,DepartmentID,DepartmentName,AppointmentDate,Reason,Treatments,Status
+A1001,P001,Aisha Khan,9876500011,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-06,Chest discomfort,"T01 Consultation; T02 ECG",Completed
+A1002,P002,Rohan Mehta,9876500012,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-07,Seasonal fever,"T01 Consultation; T03 Blood Test",Completed
+A1003,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-08,Knee pain,"T01 Consultation; T04 X-Ray; T05 Physiotherapy",Completed
+A1004,P004,Arjun Rao,9876500014,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-09,Skin rash,"T01 Consultation; T06 Skin Examination",Completed
+A1005,P005,Isha Patel,9876500015,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-10,Palpitations,"T01 Consultation; T02 ECG; T03 Blood Test",Completed
+A1006,P006,Kabir Shah,9876500016,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-11,Back pain,"T01 Consultation; T05 Physiotherapy (2)",Completed
+A1007,P007,Meera Nair,9876500017,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-13,Cough,"T01 Consultation; T03 Blood Test",Completed
+A1008,P008,Vivaan Gupta,9876500018,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-14,Acne,"T01 Consultation; T06 Skin Examination",Completed
+A1009,P009,Sana Ali,9876500019,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-15,Headache,"T01 Consultation; T03 Blood Test",Completed
+A1010,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-16,Diabetes review,"T01 Consultation; T03 Blood Test; T08 Ultrasound",Completed
+A1011,P011,Priya Das,9876500021,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-17,High blood pressure,"T01 Consultation; T02 ECG",Completed
+A1012,P012,Rahul Verma,9876500022,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-18,Shoulder pain,"T01 Consultation; T04 X-Ray",Completed
+A1013,P001,Aisha Khan,9876500011,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-20,Follow-up,"T01 Consultation; T03 Blood Test",Completed
+A1014,P002,Rohan Mehta,9876500012,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-21,Growth review,"T01 Consultation; T08 Ultrasound",Completed
+A1015,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-22,Knee follow-up,"T01 Consultation; T04 X-Ray; T05 Physiotherapy",Completed
+A1016,P004,Arjun Rao,9876500014,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-23,Eczema review,"T01 Consultation; T06 Skin Examination; T07 Dressing",Completed
+A1017,P005,Isha Patel,9876500015,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-24,Chest follow-up,"T01 Consultation; T02 ECG",Completed
+A1018,P006,Kabir Shah,9876500016,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-25,Back follow-up,"T01 Consultation; T05 Physiotherapy (3)",Completed
+A1019,P009,Sana Ali,9876500019,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-27,Migraine,"T01 Consultation; T03 Blood Test",Completed
+A1020,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-28,Thyroid review,"T01 Consultation; T08 Ultrasound; T03 Blood Test",Completed

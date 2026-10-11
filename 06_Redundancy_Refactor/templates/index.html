@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Normalization Laboratory</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#original">Skip to content</a>
+  <main id="main-content" class="shell">
+    <header class="topbar">
+      <a class="brand" href="#original"><span>Normalize</span><strong>Lab</strong></a>
+      <div class="top-copy"><span class="eyebrow">DBMS Experiment 06</span><span>Hospital redundancy refactor</span></div>
+      <a class="file-link" href="/database_schema.drawio" download>Draw.io schema</a>
+    </header>
+    <nav class="nav" aria-label="Laboratory sections">
+      <button class="nav-item active" data-view="overview">Overview</button>
+      <button class="nav-item active" data-view="original">Original database</button>
+      <button class="nav-item" data-view="anomalies">Data anomalies</button>
+      <button class="nav-item" data-view="explorer">Normalization explorer</button>
+      <button class="nav-item" data-view="dependencies">Functional dependencies</button>
+      <button class="nav-item" data-view="schema">Final schema</button>
+    </nav>
+    <div id="notice" class="notice" role="status"></div>
+    <section id="overview" class="view">
+      <div class="hero overview-hero">
+        <div>
+          <span class="eyebrow">DBMS Experiment 06</span>
+          <h1>From repeated facts to reliable relationships.</h1>
+          <p>NormalizeLab is an interactive walkthrough of hospital data normalization. Inspect the redundant source, reproduce anomalies, and follow the lossless decomposition through BCNF.</p>
+        </div>
+        <div class="overview-badge"><strong>UNF → BCNF</strong><span>five guided stages</span></div>
+      </div>
+      <div class="overview-grid">
+        <article class="overview-card overview-card-wide">
+          <span class="eyebrow">What this laboratory demonstrates</span>
+          <h2>One dataset, five perspectives</h2>
+          <div class="overview-steps">
+            <div><strong>01</strong><span>Inspect repeated patient, doctor, department, and treatment facts.</span></div>
+            <div><strong>02</strong><span>Simulate insertion, update, and deletion anomalies safely.</span></div>
+            <div><strong>03</strong><span>Decompose the relation and verify keys, dependencies, and relationships.</span></div>
+          </div>
+        </article>
+        <article class="overview-card">
+          <span class="eyebrow">Dataset scope</span>
+          <div class="overview-stat"><strong id="overview-record-count">—</strong><span>appointment records</span></div>
+          <div class="overview-stat"><strong id="overview-patient-count">—</strong><span>patients</span></div>
+          <div class="overview-stat"><strong id="overview-treatment-count">—</strong><span>atomic treatment lines</span></div>
+        </article>
+      </div>
+      <div class="overview-actions">
+        <button class="primary" data-jump="original">Inspect original data</button>
+        <button class="secondary" data-jump="explorer">Start normalization explorer</button>
+        <button class="secondary" data-jump="schema">Open schema explorer</button>
+      </div>
+      <div class="callout"><strong>Academic focus</strong><span>Functional dependencies, candidate keys, lossless decomposition, dependency preservation, and the honest BCNF conclusion are kept aligned with the SQL deliverables.</span></div>
+    </section>
+    <section id="original" class="view active">
+      <div class="hero">
+        <div><span class="eyebrow">01 / Original database</span><h1>See the redundancy before fixing it.</h1><p>One row represents an appointment, but patient, doctor, department, and repeating treatment facts travel together.</p></div>
+        <div class="stat-strip"><div><strong id="record-count">—</strong><span>appointment records</span></div><div><strong id="patient-count">—</strong><span>patients repeated</span></div><div><strong id="doctor-count">—</strong><span>doctors repeated</span></div></div>
+      </div>
+      <div class="toolbar"><label>Search original records<input id="record-search" type="search" placeholder="Appointment, patient, doctor, treatment"></label><div class="legend"><button class="pill patient-pill highlight-toggle active" data-highlight="patient" aria-pressed="true">Patient</button><button class="pill doctor-pill highlight-toggle active" data-highlight="doctor" aria-pressed="true">Doctor</button><button class="pill dept-pill highlight-toggle active" data-highlight="dept" aria-pressed="true">Department</button></div></div>
+      <div class="panel"><div class="panel-head"><div><span class="eyebrow">UNF table</span><h2>Hospital visits with repeating groups</h2></div><span class="muted">20 source rows</span></div><div class="table-scroll"><table><thead><tr><th>Appointment</th><th>Patient</th><th>Phone</th><th>Doctor</th><th>Department</th><th>Date</th><th>Treatments</th></tr></thead><tbody id="original-body"></tbody></table></div></div>
+      <div class="callout"><strong>Why this is a problem</strong><span>The Treatments column contains multiple values in one cell. The same patient, doctor, and department facts are copied across appointments, so one business fact can have many inconsistent copies.</span></div>
+    </section>
+    <section id="anomalies" class="view">
+      <div class="section-head"><div><span class="eyebrow">02 / Data anomalies</span><h1>Reproduce the failure modes.</h1><p>Each demo works on a reversible copy of the source rows. Nothing changes the dataset.</p></div><div class="segmented"><button class="active" data-anomaly="insertion">Insertion</button><button data-anomaly="update">Update</button><button data-anomaly="deletion">Deletion</button></div></div>
+      <div id="anomaly-panel" class="anomaly-grid"></div>
+    </section>
+    <section id="explorer" class="view">
+      <div class="section-head"><div><span class="eyebrow">03 / Normalization explorer</span><h1>Walk the decomposition.</h1><p>Every stage is backed by the same CSV and SQL deliverables in this folder.</p></div><div class="stage-controls"><button id="prev-stage" class="secondary">Previous</button><span id="stage-count">1 / 5</span><button id="next-stage" class="primary">Next stage</button></div></div>
+      <div class="stage-tabs" id="stage-tabs"></div><div id="stage-content"></div>
+    </section>
+    <section id="dependencies" class="view">
+      <div class="section-head"><div><span class="eyebrow">04 / Functional dependencies</span><h1>Follow each determinant.</h1><p>Select a dependency to see its role, classification, and normalization stage.</p></div></div>
+      <div class="dependency-layout"><div id="dependency-list" class="dependency-list"></div><article id="dependency-detail" class="panel detail-panel"></article></div>
+    </section>
+    <section id="schema" class="view">
+      <div class="section-head"><div><span class="eyebrow">05 / Final relational schema</span><h1>Facts in their rightful tables.</h1><p>Click a table to inspect keys, foreign keys, and relationships.</p></div><div class="comparison"><div><span>Before</span><strong>Repeated facts</strong></div><div class="arrow">→</div><div><span>After</span><strong>Related facts</strong></div></div></div>
+      <div class="schema-tools"><button id="fit-schema" class="secondary">Fit to view</button><button id="reset-schema" class="secondary">Reset selection</button><span id="schema-selection" class="muted">Select a table or relationship</span></div>
+      <div class="schema-layout"><div class="schema-visual panel"><svg id="schema-links" class="schema-links" aria-label="Table relationships"></svg><div id="schema-canvas" class="schema-canvas"></div></div><article id="schema-detail" class="panel detail-panel"></article></div>
+      <div class="callout"><strong>Lossless and dependency-preserving</strong><span>Foreign keys join the final tables back to the intended appointment-treatment information. Each determinant remains represented in the relation where it owns the fact.</span></div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

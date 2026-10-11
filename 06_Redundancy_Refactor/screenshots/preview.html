@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Experiment 06 evidence preview</title>
+  <style>
+    :root { font-family: Arial, sans-serif; color: #18251d; background: #e7f2e8; }
+    body { margin: 0; padding: 28px; }
+    .sheet { width: 1180px; min-height: 760px; margin: 0 auto; padding: 30px; box-sizing: border-box; background: #fff; border: 1px solid #c9ddcc; }
+    h1 { margin: 0 0 8px; font-size: 28px; color: #087d48; }
+    h2 { margin: 0 0 16px; font-size: 23px; }
+    .source { margin: 0 0 18px; color: #5a6d60; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th { text-align: left; padding: 9px; color: #fff; background: #087d48; }
+    td { padding: 8px 9px; border-bottom: 1px solid #dce7de; }
+    tr:nth-child(even) td { background: #f4f9f4; }
+    .columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .entity { padding: 16px; border: 2px solid #087d48; border-radius: 12px; background: #edf8ee; }
+    .entity h3 { margin: 0 0 10px; font-size: 16px; color: #087d48; }
+    .entity p { margin: 6px 0; font-size: 13px; }
+    .key { font-weight: 700; }
+    pre { margin: 0; padding: 18px; border-radius: 10px; background: #18221c; color: #e8f4e8; font: 13px/1.55 ui-monospace, Menlo, monospace; white-space: pre-wrap; }
+    .ok { padding: 14px 16px; border-radius: 10px; background: #e8f7e9; color: #087d48; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <section class="sheet" id="original">
+    <h1>DBMS Experiment 06</h1><h2>Original redundant data (UNF)</h2>
+    <p class="source">Rendered from 00_unnormalized_data.csv - repeating treatment groups remain in one cell.</p>
+    <table><thead><tr><th>Appointment</th><th>Patient</th><th>Doctor / Department</th><th>Date</th><th>Repeating group</th></tr></thead>
+      <tbody>
+        <tr><td>A1001</td><td>P001 - Aisha Khan</td><td>D01 - Dr Kavita Rao / Cardiology</td><td>2025-01-06</td><td>T01 Consultation; T02 ECG</td></tr>
+        <tr><td>A1003</td><td>P003 - Neha Singh</td><td>D03 - Dr Arjun Menon / Orthopedics</td><td>2025-01-08</td><td>T01 Consultation; T04 X-Ray; T05 Physiotherapy</td></tr>
+        <tr><td>A1005</td><td>P005 - Isha Patel</td><td>D01 - Dr Kavita Rao / Cardiology</td><td>2025-01-10</td><td>T01 Consultation; T02 ECG; T03 Blood Test</td></tr>
+        <tr><td>A1016</td><td>P004 - Arjun Rao</td><td>D04 - Dr Sara Joseph / Dermatology</td><td>2025-01-23</td><td>T01 Consultation; T06 Skin Examination; T07 Dressing</td></tr>
+        <tr><td>A1020</td><td>P010 - Aditya Bose</td><td>D05 - Dr Rahul Bose / General Medicine</td><td>2025-01-28</td><td>T01 Consultation; T08 Ultrasound; T03 Blood Test</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="sheet" id="first">
+    <h1>DBMS Experiment 06</h1><h2>First Normal Form (1NF)</h2>
+    <p class="source">Rendered from 01_1NF.csv - one atomic treatment per row; candidate key: (AppointmentID, TreatmentCode).</p>
+    <table><thead><tr><th>AppointmentID</th><th>TreatmentCode</th><th>TreatmentName</th><th>Patient</th><th>Doctor</th><th>Quantity</th><th>ChargedFee</th></tr></thead>
+      <tbody>
+        <tr><td>A1003</td><td>T01</td><td>Consultation</td><td>P003 - Neha Singh</td><td>D03 - Dr Arjun Menon</td><td>1</td><td>500.00</td></tr>
+        <tr><td>A1003</td><td>T04</td><td>X-Ray</td><td>P003 - Neha Singh</td><td>D03 - Dr Arjun Menon</td><td>1</td><td>700.00</td></tr>
+        <tr><td>A1003</td><td>T05</td><td>Physiotherapy</td><td>P003 - Neha Singh</td><td>D03 - Dr Arjun Menon</td><td>1</td><td>600.00</td></tr>
+        <tr><td>A1006</td><td>T05</td><td>Physiotherapy</td><td>P006 - Kabir Shah</td><td>D03 - Dr Arjun Menon</td><td>2</td><td>1200.00</td></tr>
+        <tr><td>A1020</td><td>T08</td><td>Ultrasound</td><td>P010 - Aditya Bose</td><td>D05 - Dr Rahul Bose</td><td>1</td><td>1200.00</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="sheet" id="second">
+    <h1>DBMS Experiment 06</h1><h2>Second Normal Form (2NF)</h2>
+    <p class="source">Rendered from 02_2NF.sql - partial dependencies are removed from the composite-key relation.</p>
+    <div class="columns">
+      <div class="entity"><h3>NF2_APPOINTMENT</h3><p class="key">PK AppointmentID</p><p>PatientID, PatientName, PatientPhone</p><p>DoctorID, DoctorName, DepartmentID</p><p>AppointmentDate, Reason, Status</p></div>
+      <div class="entity"><h3>NF2_TREATMENT</h3><p class="key">PK TreatmentCode</p><p>TreatmentName</p><p>StandardFee</p></div>
+      <div class="entity"><h3>NF2_APPOINTMENT_TREATMENT</h3><p class="key">PK AppointmentID + TreatmentCode</p><p>Quantity</p><p>ChargedFee</p></div>
+    </div>
+    <pre>AppointmentID -> appointment facts
+TreatmentCode -> treatment facts
+(AppointmentID, TreatmentCode) -> line facts</pre>
+  </section>
+  <section class="sheet" id="third">
+    <h1>DBMS Experiment 06</h1><h2>Third Normal Form (3NF)</h2>
+    <p class="source">Rendered from 03_3NF.sql - patient, doctor, and department transitive dependencies are separated.</p>
+    <div class="columns">
+      <div class="entity"><h3>Patient</h3><p class="key">PK PatientID</p><p>PatientName</p><p>PatientPhone UNIQUE</p></div>
+      <div class="entity"><h3>Doctor</h3><p class="key">PK DoctorID</p><p>DoctorName</p><p>FK DepartmentID</p></div>
+      <div class="entity"><h3>Department</h3><p class="key">PK DepartmentID</p><p>DepartmentName UNIQUE</p></div>
+      <div class="entity"><h3>Appointment</h3><p class="key">PK AppointmentID</p><p>FK PatientID, FK DoctorID</p><p>Date, Reason, Status</p></div>
+      <div class="entity"><h3>Treatment</h3><p class="key">PK TreatmentCode</p><p>TreatmentName, StandardFee</p></div>
+      <div class="entity"><h3>AppointmentTreatment</h3><p class="key">PK/FK AppointmentID + TreatmentCode</p><p>Quantity, ChargedFee</p></div>
+    </div>
+  </section>
+  <section class="sheet" id="bcnf">
+    <h1>DBMS Experiment 06</h1><h2>BCNF verification</h2>
+    <p class="source">Rendered from 04_BCNF.sql and normalization_report.md.</p>
+    <div class="ok">PASS - Every non-trivial determinant is a candidate key in its relation.</div>
+    <pre>Department: DepartmentID -> DepartmentName
+Patient: PatientID -> PatientName, PatientPhone
+Doctor: DoctorID -> DoctorName, DepartmentID
+Treatment: TreatmentCode -> TreatmentName, StandardFee
+Appointment: AppointmentID -> PatientID, DoctorID, Date, Reason, Status
+AppointmentTreatment: (AppointmentID, TreatmentCode) -> Quantity, ChargedFee
+
+Expected counts:
+Patient 12 | Doctor 5 | Department 5 | Treatment 8
+Appointment 20 | AppointmentTreatment 46</pre>
+  </section>
+  <section class="sheet" id="diagram">
+    <h1>DBMS Experiment 06</h1><h2>Final database diagram</h2>
+    <p class="source">Rendered from database_schema.drawio - final BCNF schema.</p>
+    <div class="columns">
+      <div class="entity"><h3>Department</h3><p class="key">PK DepartmentID</p><p>DepartmentName</p></div>
+      <div class="entity"><h3>Doctor</h3><p class="key">PK DoctorID</p><p>FK DepartmentID</p><p>DoctorName</p></div>
+      <div class="entity"><h3>Patient</h3><p class="key">PK PatientID</p><p>PatientName</p><p>PatientPhone</p></div>
+      <div class="entity"><h3>Appointment</h3><p class="key">PK AppointmentID</p><p>FK PatientID</p><p>FK DoctorID</p><p>Date, Reason, Status</p></div>
+      <div class="entity"><h3>Treatment</h3><p class="key">PK TreatmentCode</p><p>TreatmentName</p><p>StandardFee</p></div>
+      <div class="entity"><h3>AppointmentTreatment</h3><p class="key">PK/FK AppointmentID</p><p class="key">PK/FK TreatmentCode</p><p>Quantity, ChargedFee</p></div>
+    </div>
+  </section>
+</body>
+</html>

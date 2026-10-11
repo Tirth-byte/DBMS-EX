@@ -1,0 +1,25 @@
+scenario,category,system,repetitions,median_ms,mean_ms,stddev_ms,python_version,pandas_version,sqlite_version,operating_system
+Primary-key lookup,End-to-end,CSV/Pandas,30,4.127646,4.255324,0.359941,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Primary-key lookup,End-to-end,SQLite,30,0.183542,0.185293,0.008305,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Primary-key lookup,Warm query,Pandas,30,0.504771,0.547474,0.094424,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Primary-key lookup,Warm query,SQLite,30,0.128396,0.150633,0.061018,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Filtering CGPA > 8.5,End-to-end,CSV/Pandas,30,4.033437,4.133114,0.280614,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Filtering CGPA > 8.5,End-to-end,SQLite,30,1.822624,1.908693,0.235705,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Filtering CGPA > 8.5,Warm query,Pandas,30,0.442959,0.448270,0.012626,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Filtering CGPA > 8.5,Warm query,SQLite,30,1.598708,1.596135,0.035618,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Department + semester,End-to-end,CSV/Pandas,30,4.045625,4.059747,0.070170,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Department + semester,End-to-end,SQLite,30,0.946041,1.108425,0.385094,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Department + semester,Warm query,Pandas,30,0.549479,0.555211,0.046233,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Department + semester,Warm query,SQLite,30,0.714000,0.737632,0.058221,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Top 10 by CGPA,End-to-end,CSV/Pandas,30,6.189063,6.198553,0.125585,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Top 10 by CGPA,End-to-end,SQLite,30,0.632105,0.923222,1.238371,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Top 10 by CGPA,Warm query,Pandas,30,2.546313,2.576760,0.067917,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Top 10 by CGPA,Warm query,SQLite,30,0.466396,0.469906,0.011931,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Average CGPA by department,End-to-end,CSV/Pandas,30,4.874500,5.014931,0.329362,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Average CGPA by department,End-to-end,SQLite,30,1.635229,1.662418,0.080904,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Average CGPA by department,Warm query,Pandas,30,1.109666,1.117793,0.037329,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Average CGPA by department,Warm query,SQLite,30,1.470521,1.475221,0.025639,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Count by department,End-to-end,CSV/Pandas,30,4.810166,4.848728,0.201838,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Count by department,End-to-end,SQLite,30,1.612042,1.648769,0.103353,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Count by department,Warm query,Pandas,30,1.260229,1.309004,0.150160,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O
+Count by department,Warm query,SQLite,30,1.485729,1.536047,0.112361,3.14.7,3.0.6,3.53.4,macOS-27.0-arm64-arm-64bit-Mach-O

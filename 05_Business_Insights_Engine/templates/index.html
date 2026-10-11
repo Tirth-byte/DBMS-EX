@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Retail Intelligence</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#dashboard" aria-label="Retail Intelligence home"><span>Retail</span><strong>IQ</strong></a>
+      <nav aria-label="Dashboard navigation">
+        <button class="nav-item active" data-view="dashboard">Dashboard</button>
+        <button class="nav-item" data-view="sales">Sales</button>
+        <button class="nav-item" data-view="customers">Customers</button>
+        <button class="nav-item" data-view="reports">Reports</button>
+        <button class="nav-item" data-view="orders">Orders</button>
+      </nav>
+      <div class="top-actions"><span id="db-status" class="db-status">Connecting…</span><button id="export" class="secondary">Export CSV</button></div>
+    </header>
+
+    <section class="welcome-row">
+      <div><p class="eyebrow">Experiment 05 · PostgreSQL source of truth</p><h1 id="view-title">Retail performance overview</h1><p id="date-range">UCI Online Retail · loading source period</p><p class="data-note">Revenue means completed sales only: cancellations, non-positive quantities and non-positive prices are excluded. Revenue is not profit.</p></div>
+    </section>
+
+    <section class="filter-bar" aria-label="Global filters">
+      <label>From<input id="start" type="date"></label>
+      <label>To<input id="end" type="date"></label>
+      <label>Country<select id="country"><option value="">All countries</option></select></label>
+      <label>Product<input id="product" type="search" placeholder="Code or description"></label>
+      <label>Customer<input id="customer" type="search" inputmode="numeric" placeholder="Customer ID"></label>
+      <label>Type<select id="transaction-type"><option value="">All transactions</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></label>
+      <button id="apply-filters" class="primary">Apply</button><button id="reset-filters" class="ghost">Reset</button>
+    </section>
+
+    <div id="notice" class="notice" role="status"></div>
+
+    <section id="dashboard" class="view active">
+      <div class="dashboard-top">
+        <div class="kpi-grid">
+          <article class="kpi"><span>Completed orders</span><strong id="kpi-orders">—</strong><small>Distinct invoices</small></article>
+          <article class="kpi"><span>Completed revenue</span><strong id="kpi-revenue">—</strong><small>Positive quantity and price</small></article>
+          <article class="kpi"><span>Known customers</span><strong id="kpi-customers">—</strong><small>Missing IDs excluded</small></article>
+          <article class="kpi"><span>Cancelled invoices</span><strong id="kpi-cancelled">—</strong><small>Invoice numbers beginning C</small></article>
+        </div>
+        <article class="card revenue-card"><div class="card-head"><div><p class="eyebrow">Sales trend</p><h2>Monthly revenue</h2></div><span>GBP</span></div><div class="chart-wrap"><canvas id="revenue-chart"></canvas></div></article>
+        <article class="card orders-card"><div class="card-head"><div><p class="eyebrow">Order volume</p><h2>Monthly orders</h2></div></div><div class="chart-wrap"><canvas id="orders-chart"></canvas></div><div class="performance"><span>Average line value</span><strong id="avg-line">—</strong></div></article>
+      </div>
+      <div class="dashboard-bottom">
+        <article class="card table-card"><div class="card-head"><div><h2>Recent transactions</h2><p>Latest source records matching the active filters</p></div><button class="text-action" data-go="orders">View all</button></div><div class="table-scroll"><table><thead><tr><th>Invoice</th><th>Product</th><th>Customer</th><th>Date</th><th>Amount</th><th>Type</th></tr></thead><tbody id="recent-body"></tbody></table></div></article>
+        <article class="card"><div class="card-head"><div><h2>Top-selling products</h2><p>Ranked by completed units</p></div></div><div id="top-products-list" class="rank-list"></div></article>
+      </div>
+    </section>
+
+    <section id="sales" class="view">
+      <div class="two-column">
+        <article class="card chart-card"><div class="card-head"><div><p class="eyebrow">GROUP BY month</p><h2>Revenue over time</h2></div></div><div class="chart-large"><canvas id="sales-revenue-chart"></canvas></div></article>
+        <article class="card chart-card"><div class="card-head"><div><p class="eyebrow">Country analysis</p><h2>Revenue by country</h2></div></div><div class="chart-large"><canvas id="country-chart"></canvas></div></article>
+      </div>
+      <article class="card"><div class="card-head"><div><h2>Top products by revenue</h2><p>Completed lines only</p></div></div><div class="chart-wide"><canvas id="product-chart"></canvas></div><div class="table-scroll"><table><thead><tr><th>Stock code</th><th>Product</th><th>Units</th><th>Revenue</th></tr></thead><tbody id="sales-products-body"></tbody></table></div></article>
+    </section>
+
+    <section id="customers" class="view">
+      <div class="two-column customer-charts">
+        <article class="card"><div class="card-head"><div><h2>Customer spending distribution</h2><p>Completed revenue by spending band</p></div></div><div class="chart-large"><canvas id="spending-chart"></canvas></div></article>
+        <article class="card"><div class="card-head"><div><h2>Customers by country</h2><p>Distinct known customer IDs</p></div></div><div class="chart-large"><canvas id="customer-country-chart"></canvas></div></article>
+      </div>
+      <article class="card"><div class="card-head"><div><h2>Customer spending rankings</h2><p>Orders use distinct invoice numbers</p></div></div><div class="table-scroll tall"><table><thead><tr><th>Rank</th><th>Customer ID</th><th>Country</th><th>Orders</th><th>Completed spending</th></tr></thead><tbody id="customer-body"></tbody></table></div></article>
+    </section>
+
+    <section id="reports" class="view">
+      <div class="report-layout">
+        <article class="card report-query"><div class="card-head"><div><p class="eyebrow">SQL analysis explorer</p><h2>Predefined read-only reports</h2></div></div><label class="report-select">Analysis<select id="analysis">{% for choice in choices %}<option value="{{ choice.id }}" data-sql="{{ choice.sql|e }}" data-concepts="{{ choice.concepts|join(', ') }}">{{ choice.title }}</option>{% endfor %}</select></label><div id="concepts" class="concepts"></div><pre id="sql"></pre><div class="report-actions"><button id="run-report" class="primary">Run query</button><button id="export-report" class="secondary">Export result</button></div></article>
+        <article class="card report-result"><div class="card-head"><div><p class="eyebrow">Actual PostgreSQL result</p><h2 id="report-title">Run a report to view results</h2></div><span id="report-meta"></span></div><div id="report-empty" class="empty">The selected SQL, executed query, and displayed result always match.</div><div class="table-scroll tall"><table><thead id="report-head"></thead><tbody id="report-body"></tbody></table></div></article>
+      </div>
+    </section>
+
+    <section id="orders" class="view">
+      <article class="card"><div class="orders-toolbar"><div><h2>Transaction lines</h2><p id="orders-count">Loading records…</p></div><label class="search-box">Search<input id="order-search" type="search" placeholder="Invoice, product, stock code, customer"></label></div><div class="table-scroll order-table"><table><thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th>Stock code</th><th>Product</th><th>Qty</th><th>Unit price</th><th>Line amount</th><th>Type</th></tr></thead><tbody id="orders-body"></tbody></table></div><div class="pagination"><button id="prev-page" class="secondary">Previous</button><span id="page-label"></span><button id="next-page" class="secondary">Next</button></div></article>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='chart.umd.min.js') }}"></script>
+  <script>window.REPORTS={{ choices|tojson }};</script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

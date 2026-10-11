@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Integrity Guard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div><div class="eyebrow">Experiment 04</div><h1>Data Integrity Guard</h1><p>Library Database</p></div>
+      <div id="connection" class="connection"><span class="dot"></span><span>Checking MySQL…</span></div>
+    </header>
+    <section class="panel">
+      <div class="controls">
+        <div class="select-wrap"><select id="constraint" aria-label="Choose a constraint">{% for id, test in tests.items() %}<option value="{{ id }}" data-sql="{{ test.sql|e }}">{{ test.title }}</option>{% endfor %}</select></div>
+        <button id="run">Test Constraint</button>
+      </div>
+      <span class="label">SQL operation attempted</span>
+      <pre id="sql" class="sql"></pre>
+      <div id="empty" class="empty">Choose a constraint and run the test against MySQL.</div>
+      <div id="result" class="result">
+        <div class="result-top"><div><span class="label">Result</span><strong id="result-status"></strong></div><span id="verified" class="badge"></span></div>
+        <div class="detail"><span class="label">Reason</span><p id="reason"></p></div>
+        <div id="error-block" class="detail"><span class="label">Actual MySQL response</span><pre id="error" class="error"></pre></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const constraint=document.querySelector('#constraint'),sql=document.querySelector('#sql'),run=document.querySelector('#run'),empty=document.querySelector('#empty'),result=document.querySelector('#result'),statusText=document.querySelector('#result-status'),verified=document.querySelector('#verified'),reason=document.querySelector('#reason'),errorBlock=document.querySelector('#error-block'),errorText=document.querySelector('#error'),connection=document.querySelector('#connection');
+    const escapeText=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    const selectedSql=()=>constraint.options[constraint.selectedIndex].dataset.sql;
+    const clearResult=()=>{result.style.display='none';empty.style.display='block';empty.textContent='Click Test Constraint to execute the selected operation.'};
+    constraint.addEventListener('change',()=>{sql.textContent=selectedSql();clearResult()});sql.textContent=selectedSql();
+    run.addEventListener('click',async()=>{run.disabled=true;run.textContent='Testing…';empty.style.display='block';empty.textContent='Executing the operation inside a rollback transaction…';result.style.display='none';try{const response=await fetch('/api/test/'+encodeURIComponent(constraint.value),{method:'POST'}),data=await response.json();if(!response.ok)throw new Error(data.error||data.reason||'Constraint test failed');if(data.sql!==selectedSql())throw new Error('Selected and executed operations did not match.');empty.style.display='none';statusText.textContent=data.result;verified.textContent=data.verified?'Verified by MySQL':'Not verified';verified.className='badge '+(data.verified?'ok':'bad');reason.textContent=data.reason;errorBlock.style.display=data.error?'block':'none';errorText.textContent=data.error||'';result.style.display='block'}catch(error){empty.style.display='block';empty.className='empty failure';empty.textContent=error.message}finally{run.disabled=false;run.textContent='Test Constraint'}});
+    fetch('/api/status').then(async response=>{const data=await response.json();if(!response.ok)throw new Error(data.error);connection.className='connection ok';connection.innerHTML=`<span class="dot"></span><span>MySQL ${escapeText(data.version)}</span>`}).catch(error=>{connection.className='connection bad';connection.innerHTML='<span class="dot"></span><span>MySQL unavailable</span>';empty.className='empty failure';empty.textContent=error.message});
+  </script>
+</body>
+</html>
+

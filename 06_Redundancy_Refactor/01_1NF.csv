@@ -1,0 +1,47 @@
+AppointmentID,TreatmentCode,TreatmentName,StandardFee,PatientID,PatientName,PatientPhone,DoctorID,DoctorName,DepartmentID,DepartmentName,AppointmentDate,Reason,Quantity,ChargedFee,Status
+A1001,T01,Consultation,500.00,P001,Aisha Khan,9876500011,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-06,Chest discomfort,1,500.00,Completed
+A1001,T02,ECG,800.00,P001,Aisha Khan,9876500011,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-06,Chest discomfort,1,800.00,Completed
+A1002,T01,Consultation,500.00,P002,Rohan Mehta,9876500012,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-07,Seasonal fever,1,500.00,Completed
+A1002,T03,Blood Test,350.00,P002,Rohan Mehta,9876500012,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-07,Seasonal fever,1,350.00,Completed
+A1003,T01,Consultation,500.00,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-08,Knee pain,1,500.00,Completed
+A1003,T04,X-Ray,700.00,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-08,Knee pain,1,700.00,Completed
+A1003,T05,Physiotherapy,600.00,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-08,Knee pain,1,600.00,Completed
+A1004,T01,Consultation,500.00,P004,Arjun Rao,9876500014,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-09,Skin rash,1,500.00,Completed
+A1004,T06,Skin Examination,450.00,P004,Arjun Rao,9876500014,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-09,Skin rash,1,450.00,Completed
+A1005,T01,Consultation,500.00,P005,Isha Patel,9876500015,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-10,Palpitations,1,500.00,Completed
+A1005,T02,ECG,800.00,P005,Isha Patel,9876500015,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-10,Palpitations,1,800.00,Completed
+A1005,T03,Blood Test,350.00,P005,Isha Patel,9876500015,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-10,Palpitations,1,350.00,Completed
+A1006,T01,Consultation,500.00,P006,Kabir Shah,9876500016,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-11,Back pain,1,500.00,Completed
+A1006,T05,Physiotherapy,600.00,P006,Kabir Shah,9876500016,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-11,Back pain,2,1200.00,Completed
+A1007,T01,Consultation,500.00,P007,Meera Nair,9876500017,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-13,Cough,1,500.00,Completed
+A1007,T03,Blood Test,350.00,P007,Meera Nair,9876500017,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-13,Cough,1,350.00,Completed
+A1008,T01,Consultation,500.00,P008,Vivaan Gupta,9876500018,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-14,Acne,1,500.00,Completed
+A1008,T06,Skin Examination,450.00,P008,Vivaan Gupta,9876500018,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-14,Acne,1,450.00,Completed
+A1009,T01,Consultation,500.00,P009,Sana Ali,9876500019,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-15,Headache,1,500.00,Completed
+A1009,T03,Blood Test,350.00,P009,Sana Ali,9876500019,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-15,Headache,1,350.00,Completed
+A1010,T01,Consultation,500.00,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-16,Diabetes review,1,500.00,Completed
+A1010,T03,Blood Test,350.00,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-16,Diabetes review,1,350.00,Completed
+A1010,T08,Ultrasound,1200.00,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-16,Diabetes review,1,1200.00,Completed
+A1011,T01,Consultation,500.00,P011,Priya Das,9876500021,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-17,High blood pressure,1,500.00,Completed
+A1011,T02,ECG,800.00,P011,Priya Das,9876500021,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-17,High blood pressure,1,800.00,Completed
+A1012,T01,Consultation,500.00,P012,Rahul Verma,9876500022,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-18,Shoulder pain,1,500.00,Completed
+A1012,T04,X-Ray,700.00,P012,Rahul Verma,9876500022,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-18,Shoulder pain,1,700.00,Completed
+A1013,T01,Consultation,500.00,P001,Aisha Khan,9876500011,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-20,Follow-up,1,500.00,Completed
+A1013,T03,Blood Test,350.00,P001,Aisha Khan,9876500011,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-20,Follow-up,1,350.00,Completed
+A1014,T01,Consultation,500.00,P002,Rohan Mehta,9876500012,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-21,Growth review,1,500.00,Completed
+A1014,T08,Ultrasound,1200.00,P002,Rohan Mehta,9876500012,D02,Dr Neel Shah,DEP02,Pediatrics,2025-01-21,Growth review,1,1200.00,Completed
+A1015,T01,Consultation,500.00,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-22,Knee follow-up,1,500.00,Completed
+A1015,T04,X-Ray,700.00,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-22,Knee follow-up,1,700.00,Completed
+A1015,T05,Physiotherapy,600.00,P003,Neha Singh,9876500013,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-22,Knee follow-up,1,600.00,Completed
+A1016,T01,Consultation,500.00,P004,Arjun Rao,9876500014,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-23,Eczema review,1,500.00,Completed
+A1016,T06,Skin Examination,450.00,P004,Arjun Rao,9876500014,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-23,Eczema review,1,450.00,Completed
+A1016,T07,Dressing,250.00,P004,Arjun Rao,9876500014,D04,Dr Sara Joseph,DEP04,Dermatology,2025-01-23,Eczema review,1,250.00,Completed
+A1017,T01,Consultation,500.00,P005,Isha Patel,9876500015,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-24,Chest follow-up,1,500.00,Completed
+A1017,T02,ECG,800.00,P005,Isha Patel,9876500015,D01,Dr Kavita Rao,DEP01,Cardiology,2025-01-24,Chest follow-up,1,800.00,Completed
+A1018,T01,Consultation,500.00,P006,Kabir Shah,9876500016,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-25,Back follow-up,1,500.00,Completed
+A1018,T05,Physiotherapy,600.00,P006,Kabir Shah,9876500016,D03,Dr Arjun Menon,DEP03,Orthopedics,2025-01-25,Back follow-up,3,1800.00,Completed
+A1019,T01,Consultation,500.00,P009,Sana Ali,9876500019,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-27,Migraine,1,500.00,Completed
+A1019,T03,Blood Test,350.00,P009,Sana Ali,9876500019,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-27,Migraine,1,350.00,Completed
+A1020,T01,Consultation,500.00,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-28,Thyroid review,1,500.00,Completed
+A1020,T08,Ultrasound,1200.00,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-28,Thyroid review,1,1200.00,Completed
+A1020,T03,Blood Test,350.00,P010,Aditya Bose,9876500020,D05,Dr Rahul Bose,DEP05,General Medicine,2025-01-28,Thyroid review,1,350.00,Completed

@@ -1,0 +1,37 @@
+DROP DATABASE IF EXISTS library_db;
+CREATE DATABASE library_db;
+USE library_db;
+
+CREATE TABLE MEMBER (
+    Member_ID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Phone VARCHAR(15)
+) ENGINE=InnoDB;
+
+CREATE TABLE CATEGORY (
+    Category_ID INT PRIMARY KEY,
+    Category_Name VARCHAR(100) UNIQUE NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE BOOK (
+    Book_ID INT PRIMARY KEY,
+    Title VARCHAR(150) NOT NULL,
+    ISBN VARCHAR(20) UNIQUE NOT NULL,
+    Category_ID INT,
+    CONSTRAINT fk_book_category
+        FOREIGN KEY (Category_ID) REFERENCES CATEGORY(Category_ID)
+) ENGINE=InnoDB;
+
+CREATE TABLE BORROW (
+    Borrow_ID INT PRIMARY KEY,
+    Member_ID INT,
+    Book_ID INT,
+    Borrow_Date DATE,
+    Return_Date DATE,
+    CONSTRAINT fk_borrow_member
+        FOREIGN KEY (Member_ID) REFERENCES MEMBER(Member_ID),
+    CONSTRAINT fk_borrow_book
+        FOREIGN KEY (Book_ID) REFERENCES BOOK(Book_ID)
+) ENGINE=InnoDB;
+

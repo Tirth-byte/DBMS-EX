@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" modified="2026-10-11T00:00:00.000Z" agent="DBMS Experiment 06" version="24.7.17">
+  <diagram id="hospital-bcnf" name="Final BCNF Schema">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="DBMS Experiment 06 - Final BCNF Hospital Schema" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#173b2a;" vertex="1" parent="1">
+          <mxGeometry x="40" y="25" width="600" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend" value="PK = primary key; FK = foreign key; crow's foot endpoints show one-to-many relationships" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontColor=#526258;" vertex="1" parent="1">
+          <mxGeometry x="40" y="62" width="760" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="department" value="&lt;b&gt;DEPARTMENT&lt;/b&gt;&lt;hr&gt;PK DepartmentID&lt;br&gt;DepartmentName UNIQUE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#087d48;strokeWidth=2;fontSize=14;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="150" width="250" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="doctor" value="&lt;b&gt;DOCTOR&lt;/b&gt;&lt;hr&gt;PK DoctorID&lt;br&gt;DoctorName&lt;br&gt;FK DepartmentID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#087d48;strokeWidth=2;fontSize=14;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="370" y="150" width="250" height="125" as="geometry"/>
+        </mxCell>
+        <mxCell id="patient" value="&lt;b&gt;PATIENT&lt;/b&gt;&lt;hr&gt;PK PatientID&lt;br&gt;PatientName&lt;br&gt;PatientPhone UNIQUE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#2d6ca2;strokeWidth=2;fontSize=14;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="370" width="250" height="125" as="geometry"/>
+        </mxCell>
+        <mxCell id="appointment" value="&lt;b&gt;APPOINTMENT&lt;/b&gt;&lt;hr&gt;PK AppointmentID&lt;br&gt;FK PatientID&lt;br&gt;FK DoctorID&lt;br&gt;AppointmentDate&lt;br&gt;Reason; Status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4dd;strokeColor=#b7791f;strokeWidth=2;fontSize=14;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="335" width="290" height="165" as="geometry"/>
+        </mxCell>
+        <mxCell id="treatment" value="&lt;b&gt;TREATMENT&lt;/b&gt;&lt;hr&gt;PK TreatmentCode&lt;br&gt;TreatmentName UNIQUE&lt;br&gt;StandardFee" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5eafb;strokeColor=#7b3f98;strokeWidth=2;fontSize=14;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="150" width="250" height="125" as="geometry"/>
+        </mxCell>
+        <mxCell id="appointment-treatment" value="&lt;b&gt;APPOINTMENT_TREATMENT&lt;/b&gt;&lt;hr&gt;PK/FK AppointmentID&lt;br&gt;PK/FK TreatmentCode&lt;br&gt;Quantity&lt;br&gt;ChargedFee" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4dd;strokeColor=#b7791f;strokeWidth=2;fontSize=14;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="380" width="300" height="145" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-dept-doctor" value="has" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#087d48;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="department" target="doctor">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-patient-appointment" value="books" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#2d6ca2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="patient" target="appointment">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-doctor-appointment" value="conducts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#087d48;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="doctor" target="appointment">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-appointment-line" value="contains" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#b7791f;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="appointment" target="appointment-treatment">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge-treatment-line" value="appears in" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#7b3f98;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="treatment" target="appointment-treatment">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
